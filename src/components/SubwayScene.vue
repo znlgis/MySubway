@@ -1,11 +1,34 @@
 <template>
-  <canvas ref="canvasRef" class="babylon-canvas"></canvas>
+  <div class="scene-wrapper">
+    <canvas ref="canvasRef" class="babylon-canvas"></canvas>
+    <div v-if="selectedStation" class="station-info-panel">
+      <div class="info-header">
+        <h3>{{ selectedStation.name }}</h3>
+        <button @click="closeStationInfo" class="close-btn">✕</button>
+      </div>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="info-label">所属线路：</span>
+          <div class="lines-list">
+            <span 
+              v-for="line in getStationLines(selectedStation.id)" 
+              :key="line.id"
+              class="line-badge"
+              :style="{ backgroundColor: line.color }"
+            >
+              {{ line.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import * as BABYLON from '@babylonjs/core';
-import type { SubwayData, PathResult } from '../types/subway';
+import type { SubwayData, PathResult, Station } from '../types/subway';
 
 interface Props {
   subwayData: SubwayData | null;
@@ -15,12 +38,14 @@ interface Props {
 const props = defineProps<Props>();
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const selectedStation = ref<Station | null>(null);
 let engine: BABYLON.Engine | null = null;
 let scene: BABYLON.Scene | null = null;
 let camera: BABYLON.ArcRotateCamera | null = null;
 let stationMeshes = new Map<string, BABYLON.Mesh>();
 let lineMeshes: BABYLON.Mesh[] = [];
 let pathMeshes: BABYLON.Mesh[] = [];
+let stationDataMap = new Map<string, Station>();
 
 onMounted(() => {
   if (!canvasRef.value) return;
@@ -94,9 +119,15 @@ function renderSubwayNetwork(data: SubwayData) {
   stationMeshes.clear();
   lineMeshes.forEach(mesh => mesh.dispose());
   lineMeshes = [];
+  
+  // Clear station data map
+  stationDataMap.clear();
 
   // Create station meshes
   data.stations.forEach(station => {
+    // Store station data
+    stationDataMap.set(station.id, station);
+    
     const sphere = BABYLON.MeshBuilder.CreateSphere(
       `station-${station.id}`,
       { diameter: 0.5 },
@@ -112,6 +143,45 @@ function renderSubwayNetwork(data: SubwayData) {
     material.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
     material.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0.2);
     sphere.material = material;
+    
+    // Make station clickable
+    sphere.isPickable = true;
+    sphere.actionManager = new BABYLON.ActionManager(scene!);
+    sphere.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(
+        BABYLON.ActionManager.OnPickTrigger,
+        () => {
+          handleStationClick(station.id);
+        }
+      )
+    );
+    
+    // Add hover effect
+    sphere.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(
+        BABYLON.ActionManager.OnPointerOverTrigger,
+        () => {
+          const mat = sphere.material as BABYLON.StandardMaterial;
+          if (!isStationHighlighted(station.id)) {
+            mat.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+          }
+          document.body.style.cursor = 'pointer';
+        }
+      )
+    );
+    
+    sphere.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(
+        BABYLON.ActionManager.OnPointerOutTrigger,
+        () => {
+          const mat = sphere.material as BABYLON.StandardMaterial;
+          if (!isStationHighlighted(station.id)) {
+            mat.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0.2);
+          }
+          document.body.style.cursor = 'default';
+        }
+      )
+    );
 
     stationMeshes.set(station.id, sphere);
   });
@@ -162,6 +232,13 @@ function highlightPath(pathResult: PathResult | null) {
   pathMeshes.forEach(mesh => mesh.dispose());
   pathMeshes = [];
 
+  // Reset all stations to default color
+  stationMeshes.forEach(mesh => {
+    const material = mesh.material as BABYLON.StandardMaterial;
+    material.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
+    material.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0.2);
+  });
+
   if (!pathResult || pathResult.stations.length < 2) return;
 
   // Highlight stations in the path
@@ -169,8 +246,8 @@ function highlightPath(pathResult: PathResult | null) {
     const mesh = stationMeshes.get(station.id);
     if (mesh) {
       const material = mesh.material as BABYLON.StandardMaterial;
-      material.diffuseColor = new BABYLON.Color3(1, 1, 0);
-      material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0);
+      material.diffuseColor = new BABYLON.Color3(1, 0.84, 0);
+      material.emissiveColor = new BABYLON.Color3(0.8, 0.6, 0);
     }
   });
 
@@ -188,13 +265,14 @@ function highlightPath(pathResult: PathResult | null) {
 
     const tube = BABYLON.MeshBuilder.CreateTube(
       `path-${i}`,
-      { path: points, radius: 0.15, sideOrientation: BABYLON.Mesh.DOUBLESIDE },
+      { path: points, radius: 0.2, sideOrientation: BABYLON.Mesh.DOUBLESIDE },
       scene!
     );
 
     const material = new BABYLON.StandardMaterial(`mat-path-${i}`, scene!);
-    material.diffuseColor = new BABYLON.Color3(1, 0.8, 0);
-    material.emissiveColor = new BABYLON.Color3(0.8, 0.6, 0);
+    material.diffuseColor = new BABYLON.Color3(1, 0.27, 0);
+    material.emissiveColor = new BABYLON.Color3(1, 0.4, 0);
+    material.alpha = 0.9;
     tube.material = material;
 
     pathMeshes.push(tube);
@@ -212,13 +290,147 @@ function hexToColor3(hex: string): BABYLON.Color3 {
   }
   return new BABYLON.Color3(1, 1, 1);
 }
+
+function handleStationClick(stationId: string) {
+  const station = stationDataMap.get(stationId);
+  if (station) {
+    selectedStation.value = station;
+  }
+}
+
+function closeStationInfo() {
+  selectedStation.value = null;
+}
+
+function isStationHighlighted(stationId: string): boolean {
+  if (!props.highlightedPath) return false;
+  return props.highlightedPath.stations.some(s => s.id === stationId);
+}
+
+function getStationLines(stationId: string) {
+  if (!props.subwayData) return [];
+  return props.subwayData.lines.filter(line => 
+    line.stations.includes(stationId)
+  );
+}
 </script>
 
 <style scoped>
+.scene-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .babylon-canvas {
   width: 100%;
   height: 100%;
   display: block;
   touch-action: none;
+}
+
+.station-info-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(30, 30, 40, 0.95);
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 280px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #4fc3f7;
+}
+
+.info-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #4fc3f7;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #b0bec5;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.lines-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.line-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>

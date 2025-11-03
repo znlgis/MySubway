@@ -5,7 +5,7 @@ import ControlPanel from './components/ControlPanel.vue';
 import { useSubwayData } from './composables/useSubwayData';
 import type { PathResult } from './types/subway';
 
-const { subwayData, loading, error, loadSubwayData, importSubwayDataFromFile, getShortestPath } = useSubwayData();
+const { subwayData, loading, error, loadSubwayData, getShortestPath } = useSubwayData();
 const highlightedPath = ref<PathResult | null>(null);
 const controlPanelRef = ref<InstanceType<typeof ControlPanel> | null>(null);
 
@@ -13,26 +13,6 @@ onMounted(() => {
   // Load default subway data on mount
   loadSubwayData();
 });
-
-async function handleImportFile(file: File) {
-  try {
-    await importSubwayDataFromFile(file);
-    highlightedPath.value = null;
-    if (controlPanelRef.value) {
-      controlPanelRef.value.setPathResult(null);
-    }
-  } catch (e) {
-    console.error('Failed to import file:', e);
-  }
-}
-
-function handleLoadDefault() {
-  loadSubwayData();
-  highlightedPath.value = null;
-  if (controlPanelRef.value) {
-    controlPanelRef.value.setPathResult(null);
-  }
-}
 
 function handleFindPath(startId: string, endId: string) {
   const result = getShortestPath(startId, endId);
@@ -48,6 +28,13 @@ function handleFindPath(startId: string, endId: string) {
       controlPanelRef.value.setPathResult(null);
     }
     alert('未找到有效路径！');
+  }
+}
+
+function handleClearPath() {
+  highlightedPath.value = null;
+  if (controlPanelRef.value) {
+    controlPanelRef.value.setPathResult(null);
   }
 }
 </script>
@@ -66,9 +53,8 @@ function handleFindPath(startId: string, endId: string) {
         :subway-data="subwayData"
         :loading="loading"
         :error="error"
-        @load-default="handleLoadDefault"
-        @import-file="handleImportFile"
         @find-path="handleFindPath"
+        @clear-path="handleClearPath"
       />
     </div>
   </div>

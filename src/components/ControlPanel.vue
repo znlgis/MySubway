@@ -4,25 +4,6 @@
       <h2>地铁路径查询</h2>
     </div>
 
-    <div class="panel-section">
-      <h3>导入数据</h3>
-      <div class="file-input-wrapper">
-        <input
-          type="file"
-          accept=".json"
-          @change="handleFileImport"
-          id="file-input"
-          class="file-input"
-        />
-        <label for="file-input" class="file-label">
-          <span>📁</span> 选择JSON文件
-        </label>
-      </div>
-      <button @click="loadDefaultData" class="btn btn-secondary">
-        加载默认数据
-      </button>
-    </div>
-
     <div v-if="subwayData" class="panel-section">
       <h3>路径查询</h3>
       
@@ -30,13 +11,19 @@
         <label>起始站：</label>
         <select v-model="startStation" class="select-input">
           <option value="">请选择起始站</option>
-          <option
-            v-for="station in subwayData.stations"
-            :key="station.id"
-            :value="station.id"
+          <optgroup 
+            v-for="line in subwayData.lines" 
+            :key="line.id"
+            :label="line.name"
           >
-            {{ station.name }}
-          </option>
+            <option
+              v-for="stationId in line.stations"
+              :key="stationId"
+              :value="stationId"
+            >
+              {{ getStationName(stationId) }}
+            </option>
+          </optgroup>
         </select>
       </div>
 
@@ -44,23 +31,38 @@
         <label>终点站：</label>
         <select v-model="endStation" class="select-input">
           <option value="">请选择终点站</option>
-          <option
-            v-for="station in subwayData.stations"
-            :key="station.id"
-            :value="station.id"
+          <optgroup 
+            v-for="line in subwayData.lines" 
+            :key="line.id"
+            :label="line.name"
           >
-            {{ station.name }}
-          </option>
+            <option
+              v-for="stationId in line.stations"
+              :key="stationId"
+              :value="stationId"
+            >
+              {{ getStationName(stationId) }}
+            </option>
+          </optgroup>
         </select>
       </div>
 
-      <button
-        @click="findPath"
-        :disabled="!startStation || !endStation"
-        class="btn btn-primary"
-      >
-        查询路径
-      </button>
+      <div class="button-group">
+        <button
+          @click="findPath"
+          :disabled="!startStation || !endStation"
+          class="btn btn-primary"
+        >
+          查询路径
+        </button>
+        <button
+          v-if="pathResult"
+          @click="clearPath"
+          class="btn btn-clear"
+        >
+          清除结果
+        </button>
+      </div>
     </div>
 
     <div v-if="pathResult" class="panel-section result-section">
@@ -106,12 +108,11 @@ interface Props {
 }
 
 interface Emits {
-  (e: 'loadDefault'): void;
-  (e: 'importFile', file: File): void;
   (e: 'findPath', startId: string, endId: string): void;
+  (e: 'clearPath'): void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const startStation = ref('');
@@ -124,16 +125,10 @@ defineExpose({
   }
 });
 
-function handleFileImport(event: Event) {
-  const target = event.target as HTMLInputElement;
-  const file = target.files?.[0];
-  if (file) {
-    emit('importFile', file);
-  }
-}
-
-function loadDefaultData() {
-  emit('loadDefault');
+function getStationName(stationId: string): string {
+  if (!props.subwayData) return '';
+  const station = props.subwayData.stations.find(s => s.id === stationId);
+  return station ? station.name : stationId;
 }
 
 function findPath() {
@@ -146,6 +141,13 @@ function findPath() {
   }
   
   emit('findPath', startStation.value, endStation.value);
+}
+
+function clearPath() {
+  pathResult.value = null;
+  startStation.value = '';
+  endStation.value = '';
+  emit('clearPath');
 }
 </script>
 
@@ -199,6 +201,7 @@ function findPath() {
   border-radius: 4px;
   color: #fff;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .select-input:focus {
@@ -206,8 +209,34 @@ function findPath() {
   border-color: #4fc3f7;
 }
 
+.select-input optgroup {
+  background: #1a1a24;
+  color: #4fc3f7;
+  font-weight: bold;
+  font-style: normal;
+  padding: 8px 0;
+  margin-top: 4px;
+}
+
+.select-input option {
+  background: #2d2d3d;
+  color: #ffffff;
+  padding: 10px 8px;
+  padding-left: 20px;
+  font-weight: normal;
+}
+
+.select-input option:hover {
+  background: #3d3d4d;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
 .btn {
-  width: 100%;
+  flex: 1;
   padding: 12px;
   border: none;
   border-radius: 4px;
@@ -228,6 +257,15 @@ function findPath() {
 
 .btn-primary:hover:not(:disabled) {
   background: #29b6f6;
+}
+
+.btn-clear {
+  background: #ff7043;
+  color: #fff;
+}
+
+.btn-clear:hover {
+  background: #ff5722;
 }
 
 .btn-secondary {
