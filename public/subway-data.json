@@ -3,302 +3,417 @@
     {
       "id": "s_xilang",
       "name": "西朗",
-      "position": { "x": -18, "y": 0, "z": 0 }
+      "position": { "x": -24, "y": 0, "z": 0 }
     },
     {
       "id": "s_kengkou",
       "name": "坑口",
-      "position": { "x": -15, "y": 0, "z": 0 }
+      "position": { "x": -21, "y": 0, "z": 0 }
     },
     {
       "id": "s_huadiwan",
       "name": "花地湾",
-      "position": { "x": -12, "y": 0, "z": 0 }
+      "position": { "x": -18, "y": 0, "z": 0 }
     },
     {
       "id": "s_fangcun",
       "name": "芳村",
-      "position": { "x": -9, "y": 0, "z": 0 }
+      "position": { "x": -15, "y": 0, "z": 0 }
     },
     {
       "id": "s_huangsha",
       "name": "黄沙",
-      "position": { "x": -6, "y": 0, "z": 0 }
+      "position": { "x": -12, "y": 0, "z": 0 }
     },
     {
       "id": "s_changshoulu",
       "name": "长寿路",
-      "position": { "x": -3, "y": 0, "z": 0 }
+      "position": { "x": -9, "y": 0, "z": 0 }
     },
     {
       "id": "s_chenjiaci",
       "name": "陈家祠",
-      "position": { "x": 0, "y": 0, "z": 0 }
+      "position": { "x": -6, "y": 0, "z": 0 }
     },
     {
       "id": "s_ximenkou",
       "name": "西门口",
-      "position": { "x": 3, "y": 0, "z": 0 }
+      "position": { "x": -3, "y": 0, "z": 0 }
     },
     {
       "id": "s_gongyuanqian",
       "name": "公园前",
-      "position": { "x": 6, "y": 0, "z": 0 }
+      "position": { "x": 0, "y": 0, "z": 0 }
     },
     {
       "id": "s_nongjiangsu",
       "name": "农讲所",
-      "position": { "x": 9, "y": 0, "z": 0 }
+      "position": { "x": 3, "y": 0, "z": 0 }
     },
     {
       "id": "s_lieslilingyuan",
       "name": "烈士陵园",
-      "position": { "x": 12, "y": 0, "z": 0 }
+      "position": { "x": 6, "y": 0, "z": 0 }
     },
     {
       "id": "s_dongshankou",
       "name": "东山口",
-      "position": { "x": 15, "y": 0, "z": 0 }
+      "position": { "x": 9, "y": 0, "z": 0 }
     },
     {
       "id": "s_yangji",
       "name": "杨箕",
-      "position": { "x": 18, "y": 0, "z": 0 }
+      "position": { "x": 12, "y": 0, "z": 0 }
     },
     {
       "id": "s_tiyuxilu",
       "name": "体育西路",
-      "position": { "x": 21, "y": 0, "z": 0 }
+      "position": { "x": 15, "y": 0, "z": 0 }
     },
     {
       "id": "s_tiyuzhongxin",
       "name": "体育中心",
-      "position": { "x": 24, "y": 0, "z": 0 }
+      "position": { "x": 18, "y": 0, "z": 0 }
     },
     {
       "id": "s_gzdongzhan",
       "name": "广州东站",
-      "position": { "x": 27, "y": 0, "z": 0 }
+      "position": { "x": 21, "y": 0, "z": 0 }
     },
     {
       "id": "s_gznanzhan",
       "name": "广州南站",
-      "position": { "x": -6, "y": 0, "z": -18 }
+      "position": { "x": -12, "y": 0, "z": -24 }
     },
     {
       "id": "s_shibi",
       "name": "石壁",
-      "position": { "x": -6, "y": 0, "z": -15 }
+      "position": { "x": -12, "y": 0, "z": -21 }
     },
     {
       "id": "s_huijiang",
       "name": "会江",
-      "position": { "x": -6, "y": 0, "z": -12 }
+      "position": { "x": -12, "y": 0, "z": -18 }
     },
     {
       "id": "s_nanzhou",
       "name": "南洲",
-      "position": { "x": -6, "y": 0, "z": -9 }
+      "position": { "x": -12, "y": 0, "z": -15 }
     },
     {
       "id": "s_luoxi",
       "name": "洛溪",
-      "position": { "x": -6, "y": 0, "z": -6 }
+      "position": { "x": -12, "y": 0, "z": -12 }
     },
     {
       "id": "s_nanpu",
       "name": "南浦",
-      "position": { "x": -6, "y": 0, "z": -3 }
+      "position": { "x": -9, "y": 0, "z": -9 }
     },
     {
       "id": "s_baogangdadao",
       "name": "宝岗大道",
-      "position": { "x": 0, "y": 0, "z": -3 }
+      "position": { "x": -6, "y": 0, "z": -6 }
     },
     {
       "id": "s_jiangnanxi",
       "name": "江南西",
-      "position": { "x": 3, "y": 0, "z": -3 }
+      "position": { "x": -3, "y": 0, "z": -6 }
     },
     {
       "id": "s_changgang",
       "name": "昌岗",
-      "position": { "x": 6, "y": 0, "z": -3 }
+      "position": { "x": 0, "y": 0, "z": -6 }
     },
     {
       "id": "s_jiangtailu",
       "name": "江泰路",
-      "position": { "x": 9, "y": 0, "z": -3 }
+      "position": { "x": 3, "y": 0, "z": -6 }
     },
     {
       "id": "s_dongxiaonan",
       "name": "东晓南",
-      "position": { "x": 12, "y": 0, "z": -3 }
+      "position": { "x": 6, "y": 0, "z": -6 }
     },
     {
       "id": "s_nanzhou2",
       "name": "南洲",
-      "position": { "x": 15, "y": 0, "z": -3 }
+      "position": { "x": 9, "y": 0, "z": -6 }
     },
     {
       "id": "s_kecun",
       "name": "客村",
-      "position": { "x": 18, "y": 0, "z": -4 }
+      "position": { "x": 12, "y": 0, "z": -6 }
     },
     {
       "id": "s_chigang",
       "name": "赤岗",
-      "position": { "x": 21, "y": 0, "z": -4 }
+      "position": { "x": 15, "y": 0, "z": -3 }
     },
     {
       "id": "s_modiesha",
       "name": "磨碟沙",
-      "position": { "x": 21, "y": 0, "z": -1 }
+      "position": { "x": 15, "y": 0, "z": 0 }
     },
     {
       "id": "s_xingangdong",
       "name": "新港东",
-      "position": { "x": 21, "y": 0, "z": 2 }
+      "position": { "x": 15, "y": 0, "z": 3 }
     },
     {
       "id": "s_pazhou",
       "name": "琶洲",
-      "position": { "x": 21, "y": 0, "z": 5 }
+      "position": { "x": 15, "y": 0, "z": 6 }
     },
     {
       "id": "s_wanshengwei",
       "name": "万胜围",
-      "position": { "x": 21, "y": 0, "z": 8 }
+      "position": { "x": 15, "y": 0, "z": 9 }
     },
     {
       "id": "s_tianhekeyunzhan",
       "name": "天河客运站",
-      "position": { "x": 24, "y": 0, "z": 8 }
+      "position": { "x": 18, "y": 0, "z": 12 }
     },
     {
       "id": "s_wushan",
       "name": "五山",
-      "position": { "x": 24, "y": 0, "z": 5 }
+      "position": { "x": 18, "y": 0, "z": 9 }
     },
     {
       "id": "s_huashi",
       "name": "华师",
-      "position": { "x": 24, "y": 0, "z": 2 }
+      "position": { "x": 18, "y": 0, "z": 6 }
     },
     {
       "id": "s_gangding",
       "name": "岗顶",
-      "position": { "x": 24, "y": 0, "z": -1 }
+      "position": { "x": 18, "y": 0, "z": 3 }
     },
     {
       "id": "s_shipaiqiao",
       "name": "石牌桥",
-      "position": { "x": 24, "y": 0, "z": -2 }
+      "position": { "x": 16.5, "y": 0, "z": 1.5 }
     },
     {
       "id": "s_guangzhoutower",
       "name": "广州塔",
-      "position": { "x": 21, "y": 0, "z": -7 }
+      "position": { "x": 15, "y": 0, "z": -6 }
     },
     {
       "id": "s_datang",
       "name": "大塘",
-      "position": { "x": 15, "y": 0, "z": -7 }
+      "position": { "x": 12, "y": 0, "z": -9 }
     },
     {
       "id": "s_lijiao",
       "name": "沥滘",
-      "position": { "x": 12, "y": 0, "z": -7 }
+      "position": { "x": 6, "y": 0, "z": -12 }
     },
     {
       "id": "s_xiajiao",
       "name": "厦滘",
-      "position": { "x": 9, "y": 0, "z": -7 }
+      "position": { "x": 3, "y": 0, "z": -15 }
     },
     {
       "id": "s_dashi",
       "name": "大石",
-      "position": { "x": 6, "y": 0, "z": -7 }
+      "position": { "x": 0, "y": 0, "z": -18 }
     },
     {
       "id": "s_hanxichanglong",
       "name": "汉溪长隆",
-      "position": { "x": 3, "y": 0, "z": -7 }
+      "position": { "x": -3, "y": 0, "z": -21 }
     },
     {
       "id": "s_shiqiao",
       "name": "市桥",
-      "position": { "x": 0, "y": 0, "z": -7 }
+      "position": { "x": -6, "y": 0, "z": -24 }
     },
     {
       "id": "s_jiaokou",
       "name": "滘口",
-      "position": { "x": -12, "y": 0, "z": 6 }
+      "position": { "x": -18, "y": 0, "z": 9 }
     },
     {
       "id": "s_tanwei",
       "name": "坦尾",
-      "position": { "x": -9, "y": 0, "z": 6 }
+      "position": { "x": -15, "y": 0, "z": 9 }
     },
     {
       "id": "s_zhongshanba",
       "name": "中山八",
-      "position": { "x": -6, "y": 0, "z": 6 }
+      "position": { "x": -12, "y": 0, "z": 9 }
     },
     {
       "id": "s_xichang",
       "name": "西场",
-      "position": { "x": -3, "y": 0, "z": 6 }
+      "position": { "x": -9, "y": 0, "z": 9 }
     },
     {
       "id": "s_xicun",
       "name": "西村",
-      "position": { "x": 0, "y": 0, "z": 6 }
+      "position": { "x": -6, "y": 0, "z": 9 }
     },
     {
       "id": "s_gzhuochezhan",
       "name": "广州火车站",
-      "position": { "x": 3, "y": 0, "z": 6 }
+      "position": { "x": -3, "y": 0, "z": 9 }
     },
     {
       "id": "s_xiaobei",
       "name": "小北",
-      "position": { "x": 6, "y": 0, "z": 6 }
+      "position": { "x": 0, "y": 0, "z": 9 }
     },
     {
       "id": "s_taojin",
       "name": "淘金",
-      "position": { "x": 9, "y": 0, "z": 6 }
+      "position": { "x": 3, "y": 0, "z": 9 }
     },
     {
       "id": "s_quzhuang",
       "name": "区庄",
-      "position": { "x": 12, "y": 0, "z": 6 }
+      "position": { "x": 6, "y": 0, "z": 9 }
     },
     {
       "id": "s_dongwuyuan",
       "name": "动物园",
-      "position": { "x": 15, "y": 0, "z": 6 }
+      "position": { "x": 9, "y": 0, "z": 9 }
     },
     {
       "id": "s_wuyangcun",
       "name": "五羊邨",
-      "position": { "x": 18, "y": 0, "z": 3 }
+      "position": { "x": 12, "y": 0, "z": 6 }
     },
     {
       "id": "s_zhujiangxincheng",
       "name": "珠江新城",
-      "position": { "x": 21, "y": 0, "z": -2 }
+      "position": { "x": 15, "y": 0, "z": -1.5 }
     },
     {
       "id": "s_liede",
       "name": "猎德",
-      "position": { "x": 18, "y": 0, "z": -7 }
+      "position": { "x": 15, "y": 0, "z": -9 }
     },
     {
       "id": "s_tancun",
       "name": "潭村",
-      "position": { "x": 18, "y": 0, "z": -10 }
+      "position": { "x": 15, "y": 0, "z": -12 }
+    },
+    {
+      "id": "s_fs_shixi",
+      "name": "石溪",
+      "position": { "x": 3, "y": 0, "z": -13.5 }
+    },
+    {
+      "id": "s_fs_yangang",
+      "name": "燕岗",
+      "position": { "x": 0, "y": 0, "z": -15 }
+    },
+    {
+      "id": "s_fs_shayuan",
+      "name": "沙园",
+      "position": { "x": -3, "y": 0, "z": -16.5 }
+    },
+    {
+      "id": "s_fs_shayong",
+      "name": "沙涌",
+      "position": { "x": -6, "y": 0, "z": -18 }
+    },
+    {
+      "id": "s_fs_hedong",
+      "name": "鹤洞",
+      "position": { "x": -9, "y": 0, "z": -19.5 }
+    },
+    {
+      "id": "s_fs_xilang",
+      "name": "西塱",
+      "position": { "x": -12, "y": 0, "z": -21 }
+    },
+    {
+      "id": "s_fs_jushu",
+      "name": "菊树",
+      "position": { "x": -15, "y": 0, "z": -22.5 }
+    },
+    {
+      "id": "s_fs_longxi",
+      "name": "龙溪",
+      "position": { "x": -18, "y": 0, "z": -24 }
+    },
+    {
+      "id": "s_fs_jinronggaoxinqu",
+      "name": "金融高新区",
+      "position": { "x": -21, "y": 0, "z": -25.5 }
+    },
+    {
+      "id": "s_fs_qiandenghu",
+      "name": "千灯湖",
+      "position": { "x": -24, "y": 0, "z": -27 }
+    },
+    {
+      "id": "s_fs_leigang",
+      "name": "礌岗",
+      "position": { "x": -27, "y": 0, "z": -28.5 }
+    },
+    {
+      "id": "s_fs_nanguilu",
+      "name": "南桂路",
+      "position": { "x": -30, "y": 0, "z": -30 }
+    },
+    {
+      "id": "s_fs_guicheng",
+      "name": "桂城",
+      "position": { "x": -33, "y": 0, "z": -31.5 }
+    },
+    {
+      "id": "s_fs_chaoan",
+      "name": "朝安",
+      "position": { "x": -36, "y": 0, "z": -33 }
+    },
+    {
+      "id": "s_fs_pujunbeilu",
+      "name": "普君北路",
+      "position": { "x": -39, "y": 0, "z": -34.5 }
+    },
+    {
+      "id": "s_fs_zumiao",
+      "name": "祖庙",
+      "position": { "x": -42, "y": 0, "z": -36 }
+    },
+    {
+      "id": "s_fs_tongjilu",
+      "name": "同济路",
+      "position": { "x": -45, "y": 0, "z": -37.5 }
+    },
+    {
+      "id": "s_fs_jihuayuan",
+      "name": "季华园",
+      "position": { "x": -48, "y": 0, "z": -39 }
+    },
+    {
+      "id": "s_fs_kuiqilu",
+      "name": "魁奇路",
+      "position": { "x": -51, "y": 0, "z": -40.5 }
+    },
+    {
+      "id": "s_fs_lanshi",
+      "name": "澜石",
+      "position": { "x": -54, "y": 0, "z": -42 }
+    },
+    {
+      "id": "s_fs_shijilian",
+      "name": "世纪莲",
+      "position": { "x": -57, "y": 0, "z": -43.5 }
+    },
+    {
+      "id": "s_fs_dongping",
+      "name": "东平",
+      "position": { "x": -60, "y": 0, "z": -45 }
+    },
+    {
+      "id": "s_fs_xinchengdong",
+      "name": "新城东",
+      "position": { "x": -63, "y": 0, "z": -46.5 }
     }
   ],
   "lines": [
@@ -325,6 +440,12 @@
       "name": "5号线",
       "color": "#C1002A",
       "stations": ["s_jiaokou", "s_tanwei", "s_zhongshanba", "s_xichang", "s_xicun", "s_gzhuochezhan", "s_xiaobei", "s_taojin", "s_quzhuang", "s_dongwuyuan", "s_yangji", "s_wuyangcun", "s_zhujiangxincheng", "s_liede", "s_tancun"]
+    },
+    {
+      "id": "line_foshan_guangfo",
+      "name": "广佛线",
+      "color": "#00FFAA",
+      "stations": ["s_lijiao", "s_nanzhou", "s_fs_shixi", "s_fs_yangang", "s_fs_shayuan", "s_fs_shayong", "s_fs_hedong", "s_fs_xilang", "s_fs_jushu", "s_fs_longxi", "s_fs_jinronggaoxinqu", "s_fs_qiandenghu", "s_fs_leigang", "s_fs_nanguilu", "s_fs_guicheng", "s_fs_chaoan", "s_fs_pujunbeilu", "s_fs_zumiao", "s_fs_tongjilu", "s_fs_jihuayuan", "s_fs_kuiqilu", "s_fs_lanshi", "s_fs_shijilian", "s_fs_dongping", "s_fs_xinchengdong"]
     }
   ]
 }

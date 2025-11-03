@@ -69,10 +69,6 @@
       <h3>查询结果</h3>
       
       <div class="result-item">
-        <strong>总距离：</strong> {{ pathResult.totalDistance.toFixed(2) }} 单位
-      </div>
-      
-      <div class="result-item">
         <strong>途经线路：</strong>
         <span class="lines">{{ pathResult.lines.join('、') }}</span>
       </div>
@@ -80,8 +76,13 @@
       <div class="result-item">
         <strong>途经站点（{{ pathResult.stations.length }}站）：</strong>
         <ol class="station-list">
-          <li v-for="station in pathResult.stations" :key="station.id">
+          <li 
+            v-for="station in pathResult.stations" 
+            :key="station.id"
+            :class="{ 'transfer-station': isTransferStation(station.id) }"
+          >
             {{ station.name }}
+            <span v-if="isTransferStation(station.id)" class="transfer-tag">换乘</span>
           </li>
         </ol>
       </div>
@@ -129,6 +130,21 @@ function getStationName(stationId: string): string {
   if (!props.subwayData) return '';
   const station = props.subwayData.stations.find(s => s.id === stationId);
   return station ? station.name : stationId;
+}
+
+function isTransferStation(stationId: string): boolean {
+  if (!props.subwayData || !pathResult.value) return false;
+  
+  // 获取当前路径途经的线路
+  const pathLines = pathResult.value.lines;
+  
+  // 统计该站点在当前路径途经的线路中出现的次数
+  const lineCount = props.subwayData.lines.filter(line => 
+    pathLines.includes(line.name) && line.stations.includes(stationId)
+  ).length;
+  
+  // 只有在当前路径的途经线路中出现2次及以上才算换乘站
+  return lineCount >= 2;
 }
 
 function findPath() {
@@ -334,6 +350,37 @@ function clearPath() {
 
 .station-list li {
   margin-bottom: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.station-list li.transfer-station {
+  font-weight: 600;
+  color: #4fc3f7;
+}
+
+.transfer-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .error-message {
